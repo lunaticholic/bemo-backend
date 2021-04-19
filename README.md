@@ -39,6 +39,12 @@ _ 이걸 설치하면 반드시 다음의 구문도 같이 해야 됨
 _ npx prisma init
 _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확인바람
 
+-[X] npx prisma studio
+\_ 우리를 위한 시각적 데이터를 제공해주는 고마운 녀석
+\_ 데이터베이스에 저장된 테이블이며 칼럼들, 그리고 안에 들어 있는 데이터를 보여주는 Amazing
+\_ 자주 쓸 예정이니까 이 역시 package.json의 script 부분에 저장하면 쉽겠지?
+\_ 참고로 실행하면 안에서 데이터를 수정할 수도 있음(?)(!)
+
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev
