@@ -16,13 +16,14 @@ generator client {
 
 // Prisma Migrate는 이 schema.prisma 파일의 데이터모델을 쓰고 설명할 수 있게 해주지요
 // 이 파일에 모든 Model들을 나열하면, Prisma Migrate는 그 설명들을 데이터베이스에 적용해줄거임
-model Movie {
+model User {
   id        Int      @id @default(autoincrement())
-  title     String
-  year      Int
-  genre     String?
+  username  String   @unique
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 // Prisma는 기본적으로 required로 지정되어 있기 때문에 required가 아닌 것은 물음표로 지정해야 됨
+// Prisma에서 schema를 변경한다면 반드시 migrate는 필수이다!! 무조건!!

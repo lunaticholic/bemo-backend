@@ -8,21 +8,22 @@ import { gql } from "apollo-server";
 // GraphQL은 반대로 required를 지정할 때 느낌표로 지정해야됨, 반드시 Prisma와 맞춰줘야 한다
 // 명심할 사항 하나, 파일을 typeDefs로 새로 만들어줄 때에는 아래의 graphql은 반드시 export default 되어야 한다는 솨실!
 export default gql`
-    type Movie {
-        id: Int!
-        title: String!
-        year: Int!
-        genre: String
+    type User {
+        id: String!
+        username: String!
+        email: String!
         createdAt: String!
         updatedAt: String!
     }
-    type Query {
-        movies: [Movie]
-        movie(id: Int!): Movie
-    }
     type Mutation {
-        createMovie(title: String!, year: Int!, genre: String): Movie
-        deleteMovie(id: Int!): Movie
-        updateMovie(id: Int!, year: Int!): Movie
+        createAccount(
+            username: String!
+            email: String!
+            password: String!
+        ): User
+    }
+    type Query {
+        seeProfile(username: String): User
     }
 `;
+// 다른 사람의 profile을 보려면 뭐로 검색해야 볼 수 있을까? 바로 username으로 검색해야되지?
