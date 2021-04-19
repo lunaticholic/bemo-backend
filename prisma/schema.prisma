@@ -24,3 +24,5 @@ model Movie {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+// Prisma는 기본적으로 required로 지정되어 있기 때문에 required가 아닌 것은 물음표로 지정해야 됨

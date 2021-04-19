@@ -42,8 +42,10 @@ _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev
-_ schema.prisma 안에서 정의한 구문을 데이터베이스의 형태로 변형시켜주는 명령어
-_ 이 말은, SQL의 코드로 변환해준다는 이야기임
+\_ schema.prisma 안에서 정의한 구문을 데이터베이스의 형태로 변형시켜주는 명령어
+\_ 이 말은, SQL의 코드로 변환해준다는 이야기임
+\_이 것은 곧 데이터베이스에도 적용시킨다는 아주 Super Cool한 명령어
+\_ 많이 쓸 예정이라면 package.json의 script 부분에 등록하면 됨
 
 ## Installation VSCODE Extentions
 
