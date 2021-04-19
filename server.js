@@ -3,17 +3,40 @@
 import { ApolloServer, gql } from "apollo-server";
 
 // 서버에서 뭔가를 실행하기 위한 쿼리문을 만드는 녀석
+// GraphQL문으로 작성되어 있음
 const typeDefs = gql`
+type Movie {
+    title: String
+    year: Int
+}
     type Query {
-        hello: String
+        movies: [Movie]
+        movie: Movie
+    }
+    type Mutation {
+        createMovie(title: String!): Boolean
+        deleteMovie(title: String!): Boolean
     }
 `;
 
 // 서버에서 실제로 뭔가를 보여주는 녀석
 const resolvers = {
     Query: {
-        hello: () => "bebe",
+        movies: () => [],
+        movie: () => ({title: "Hello", year: 2020}),
     },
+    // _는 root를 적는것과 똑같다
+    // args에는 resolvers의 query에서 오는 값을 반환한다.
+    Mutation: {
+        createMovie: (_, {title}) => {
+            console.log(title);
+            return true;
+        },
+        deleteMovie: (_, {title}) => {
+            console.log(title);
+            return true;
+        },
+    }
 };
 
 // 서버를 실행할 때 이 녀석들을 데리고 서버를 실행하거라고 알려주는 녀석
