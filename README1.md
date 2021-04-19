@@ -52,6 +52,9 @@ _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확
 -[X] npm install dotenv
 \_ env파일을 읽어야 되니까 필수항목으로 설치해야됨
 
+-[X] npm install bcrypt
+\_ 비밀번호를 hashing해서 저장하기 위한 아주 좋은 모듈
+
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev
