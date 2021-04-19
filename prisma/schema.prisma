@@ -1,0 +1,13 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// 데이터베이스는 postgreSQL과 대화하도록 설정되어 있다.
+// 데이터베이스 URL은 DATABASE_URL이라는 환경변수를 통해서 접속하도록 설정되어 있다.
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
