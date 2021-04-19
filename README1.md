@@ -49,6 +49,9 @@ _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확
 \_ 기본적으로 모든 걸 함께 불러오도록 해주는 Super Sexy한 모듈
 \_ 뒤에 @latest는 가장 최근 버전을 설치하겠다는 압박임
 
+-[X] npm install dotenv
+\_ env파일을 읽어야 되니까 필수항목으로 설치해야됨
+
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev
