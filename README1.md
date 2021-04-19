@@ -45,6 +45,10 @@ _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확
 \_ 자주 쓸 예정이니까 이 역시 package.json의 script 부분에 저장하면 쉽겠지?
 \_ 참고로 실행하면 안에서 데이터를 수정할 수도 있음(?)(!)
 
+-[X] npm install graphql-tools@latest
+\_ 기본적으로 모든 걸 함께 불러오도록 해주는 Super Sexy한 모듈
+\_ 뒤에 @latest는 가장 최근 버전을 설치하겠다는 압박임
+
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev

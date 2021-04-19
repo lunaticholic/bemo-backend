@@ -6,7 +6,7 @@ import { gql } from "apollo-server";
 // GraphQL문으로 작성되어 있음
 // 아마 Prisma를 보다가 GraphQL을 보면 반대로 되어 있는 구문 하나를 발견할 수 있음
 // GraphQL은 반대로 required를 지정할 때 느낌표로 지정해야됨, 반드시 Prisma와 맞춰줘야 한다
-export const typeDefs = gql`
+export default gql`
     type Movie {
         id: Int!
         title: String!
