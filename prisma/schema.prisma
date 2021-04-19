@@ -8,6 +8,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// client는 기본적으로 '어떤 방식으로 데이터베이스와 상호작용하는가'라는 의미를 담고있다.
+// 경우에 따라서는 client라는 변수를 바꿀수도 있지만 굳이?
 generator client {
   provider = "prisma-client-js"
+}
+
+// Prisma Migrate는 이 schema.prisma 파일의 데이터모델을 쓰고 설명할 수 있게 해주지요
+// 이 파일에 모든 Model들을 나열하면, Prisma Migrate는 그 설명들을 데이터베이스에 적용해줄거임
+model Movie {
+  id        Int      @id @default(autoincrement())
+  title     String
+  year      Int
+  genre     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

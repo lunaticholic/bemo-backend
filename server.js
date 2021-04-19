@@ -6,6 +6,7 @@ import { ApolloServer, gql } from "apollo-server";
 // GraphQL문으로 작성되어 있음
 const typeDefs = gql`
 type Movie {
+    id: Int
     title: String
     year: Int
 }
