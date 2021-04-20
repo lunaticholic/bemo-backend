@@ -7,7 +7,16 @@ import { ApolloServer } from "apollo-server";
 import schema from "./schema";
 
 // 서버를 실행할 때 이 녀석들을 데리고 서버를 실행하거라고 알려주는 녀석
-const server = new ApolloServer({ schema });
+const server = new ApolloServer({ 
+    schema, 
+    context: {
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE4OTQwMzY5fQ.M_XWvk3yHSwnrEZJiHzpy8WXQGd_K9B_QvPFXEDQq2I"
+    } 
+});
+
+/*
+    Profile을 수정하려면 이 곳에서 editProfile쪽으로 token을 보내야 수정하려는 user가 로그인한 user와 동일한지 확인이 가능하다.
+*/
 
 const PORT = process.env.PORT
 

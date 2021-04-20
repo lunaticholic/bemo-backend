@@ -6,10 +6,10 @@ import jwt from "jsonwebtoken";
 
 export default {
     Mutation: {
-        editProfile: async (_, { username, email, password: newPassword, token }) => {
+        editProfile: async (_, { username, email, password: newPassword }, { token }) => {
             const { id } = await jwt.verify(token, process.env.SECRET_KEY);
             // console.log(verifiedToken);
-
+            
             let uglyPassword = null;
             if ( newPassword ) {
                 uglyPassword = await bcrypt.hash(newPassword, 10)
@@ -35,6 +35,8 @@ export default {
     이 토큰이 변경되지 않은 순수하게 우리가 만들었다는걸 확인해야 된다.
     이 토큰 안에는 user의 id가 담겨있다는것을 알 수 있다. 못믿겠으면 console.log로 찍어보셈.
     이 안의 id값을 어디로 넘겨주냐면 18번째 줄의 id로 넘겨줄거임
+        -차후에 수정된 질문: token을 어떻게 받을건데? 바로 http header에 넣어서 받을거임
+        
 
     15번째 줄
     그래서 그 점을 고려해서 bcrypt를 불러와서 다시 hashing한 다음 저장해야 한다.
