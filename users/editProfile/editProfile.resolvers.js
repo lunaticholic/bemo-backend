@@ -2,45 +2,47 @@
 // import문은 babel/preset-env가 있어야됨
 import client from "../../client"
 import bcrypt from "bcrypt";
+import { protectedResolver } from "../users.utils";
 
 export default {
     Mutation: {
-        editProfile: async (_, { username, email, password: newPassword }, { loggedInUser, protectResolver }) => {
-            // console.log(loggedInUser)
-            protectResolver(loggedInUser);
-
-            let uglyPassword = null;
-            if ( newPassword ) {
-                uglyPassword = await bcrypt.hash(newPassword, 10)
+        editProfile: protectedResolver(
+            async (_, { username, email, password: newPassword }, { loggedInUser }) => {
+                // console.log(loggedInUser)
+    
+                let uglyPassword = null;
+                if ( newPassword ) {
+                    uglyPassword = await bcrypt.hash(newPassword, 10)
+                }
+    
+                const updateUser = await client.user.update({ where: { id: loggedInUser.id }, data: { username, email, ...(uglyPassword && {password: uglyPassword}) } })
+                if (updateUser.id) {
+                    return { ok: true }
+                } else {
+                    return { ok: false, error: "PROFILE을 수정하지 못했습니다." }
+                }
             }
-
-            const updateUser = await client.user.update({ where: { id: loggedInUser.id }, data: { username, email, ...(uglyPassword && {password: uglyPassword}) } })
-            if (updateUser.id) {
-                return { ok: true }
-            } else {
-                return { ok: false, error: "PROFILE을 수정하지 못했습니다." }
-            }
-        }
+        )
     }
 }
 
 /*
-    8번째 줄
+    9번째 줄
+    protectedResolver를 호출하게 되면 어떤 현상이 발생하는냐?
+    여기에 user가 로그인 되어 있는지 안되어 있는지 선행을 시작하게 됨. 로그인 안되어 있으면? 못하는거지 뭐
+
+    10번째 줄
     Profile을 수정할 때 어떤 데이터들을 보내야 될까?
     그 점을 고려하는게 1번째 목적이고
     두번째는 password는 반드시 hashing된 password가 저장되어야 한다는 것을 기억해야 한다.
 
-    10번째 줄
-    users.utils.js에 작성된 구문을 불러와 실행하면 로그인 안된 user들은 13번째 줄부터의 코드에 접근할 수 없음!
-    옴마야
-
-    14번째 줄
+    15번째 줄
     그래서 그 점을 고려해서 bcrypt를 불러와서 다시 hashing한 다음 저장해야 한다.
 
-    17번째 줄
+    18번째 줄
     uglyPassword에 값이 있다면 password에는 uglyPassword값을 할당하여 저장할 것이다.
 
-    18번째 if문
+    19번째 if문
     당연한거다. 13번째 줄이 정확하다면 ok에는 true가 담겨 Profile이 수정될 것이고
     그렇지 않다면 ok에는 false가, error에는 메세지가 출력될 것이다.
 */
