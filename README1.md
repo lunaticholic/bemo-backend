@@ -63,6 +63,10 @@ _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확
 \_이 것은 곧 데이터베이스에도 적용시킨다는 아주 Super Cool한 명령어
 \_ 많이 쓸 예정이라면 package.json의 script 부분에 등록하면 됨
 
+-[X] npm install jsonwebtoken
+\_ token은 두가지가 필요하다.
+\_ payload 우리가 토근에 넣게 되는 것이고, secretOrPrivateKey 서버가 서명하는 키
+
 ## Installation VSCODE Extentions
 
 -[X] Prisma

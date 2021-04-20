@@ -7,13 +7,39 @@ import bcrypt from "bcrypt";
 export default {
     Mutation: {
         createAccount: async (_, { username, email, password }) => {
-            const existingUser = await client.user.findFirst({ where: { OR: [ { username }, { email }, ], }, });
-            console.log(existingUser);
+        try {
+            const existingUser = await client.user.findFirst({
+            where: { OR: [{ username }, { email }] },
+            });
+            // console.log(existingUser);
+
+            if (existingUser) {
+            throw new Error("현재 사용중인 username입니다. ");
+            }
 
             const uglyPassword = await bcrypt.hash(password, 10);
-            console.log(uglyPassword);
+            // console.log(uglyPassword);
 
-            return client.user.create({ data: { username, email, password: uglyPassword }, });
+            return client.user.create({
+            data: { username, email, password: uglyPassword },
+            });
+        } catch (e) {
+            return e;
+        }
+        },
+        login: async (_, { username, password }) => {
+        // user를 찾을때는 args.username으로 찾는다.
+        const user = await client.user.findFirst({ where: { username } })
+        if (!user) {
+            return { ok: false, error: "USER를 찾을 수 없습니다."}
+        }
+        // user를 찾으면 password가 args.password와 같은지 확인하고
+        const passwordOk = await bcrypt.compare(password, user.password);
+        // console.log(passwordOk);
+        if (!passwordOk) {
+            return { ok: false, error: "PASSWORD가 잘못되었습니다."}
+        }
+        // 둘다 맞다면 token을 발행해서 넘겨줄거임
         },
     },
 };
@@ -26,6 +52,18 @@ export default {
     hash function은 단방향으로만 정보를 바꿀수 있는 아주 좋은 녀석이라서!!
     뒤에 10이 들어가는 구역을 salt(또는 papper)라고 부르는데 hash가 끝난 후에 무작위로 추가되는 텍스트임
 
-    16번째줄
+    16번째 줄
     그러고 모두 다 잘된다면 user를 return 할거야
+
+    26번째 줄
+    try 구문에서 에러가 발생하면 어디로 넘어갈까? 당근 catch로 넘어간다
+
+    32번째 줄
+    user를 찾을 때는 첫번째로 올바른 username을 입력했는지 찾아야한다.
+    33번째 줄
+    만약 올바른 username을 입력하지 않았다면 바로 error를 발생해서 차단시켜 버려야 한다.
+    36번째 줄
+    올바른 username을 입력했다면 바로 올바른 password인지 확인해야 된다.
+    이것은 bcrypt의 compare메소드를 통해서 알아볼 수 있으면, 입력된 Password가 User의 password와 맞는지 확인한다.
+    확인하는 방법은 현재 입력한 password를 hashing했을 때의 값과 DB에 저장된 User의 password와 일치하면 통과한다.
 */
