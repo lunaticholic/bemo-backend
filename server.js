@@ -5,13 +5,13 @@ require("dotenv").config();
 // import문은 babel/preset-env가 있어야됨
 import { ApolloServer } from "apollo-server";
 import schema from "./schema";
-import { getUser } from "./users/users.utils";
+import { getUser, protectResolver } from "./users/users.utils";
 
 // 서버를 실행할 때 이 녀석들을 데리고 서버를 실행하거라고 알려주는 녀석
 const server = new ApolloServer({ 
     schema, 
     context: async ({ req }) => {
-        return { loggedInUser: await getUser(req.headers.token) }
+        return { loggedInUser: await getUser(req.headers.token), protectResolver }
     }
 });
 /*

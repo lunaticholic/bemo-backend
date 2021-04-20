@@ -27,3 +27,18 @@ export const getUser = async(token) => {
         -차후에 수정된 질문: token을 어떻게 받을건데? 바로 http header에 넣어서 받을거임
             근데 어떻게 받을거냐면 바로 server.js에 보면 친절하게 설명되어 있음
 */
+
+export const protectResolver = ( user ) => {
+    if ( !user ) {
+        return {
+            ok: false,
+            error: "로그인을 하신 후 수정하시기 바랍니다."
+        }
+    }
+}
+
+/*
+    32번째 줄
+    로그인되어 있지 않은 유저가 접근하려고 하면 에러메세지를 발급해주자! 얌마!
+    그리고 그 이후에 있는 코드들을 실행시키지 못하게 해줘야 되는데, 앞으로 모든 resolvers에서 protectResolvers를 사용해야 된다.
+*/
