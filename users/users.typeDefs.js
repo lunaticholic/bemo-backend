@@ -16,18 +16,5 @@ export default gql`
         createdAt: String!
         updatedAt: String!
     }
-    type LoginResult {
-        ok: Boolean!
-        token: String
-        error: String
-    }
-    type Mutation {
-        createAccount(username: String!, email: String!, password: String!): User
-        login(username: String!, password: String!): LoginResult!
-        
-    }
-    type Query {
-        seeProfile(username: String): User
-    }
 `;
 // 다른 사람의 profile을 보려면 뭐로 검색해야 볼 수 있을까? 바로 username으로 검색해야되지?
