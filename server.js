@@ -5,17 +5,23 @@ require("dotenv").config();
 // import문은 babel/preset-env가 있어야됨
 import { ApolloServer } from "apollo-server";
 import schema from "./schema";
+import { getUser } from "./users/users.utils";
 
 // 서버를 실행할 때 이 녀석들을 데리고 서버를 실행하거라고 알려주는 녀석
 const server = new ApolloServer({ 
     schema, 
-    context: {
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE4OTQwMzY5fQ.M_XWvk3yHSwnrEZJiHzpy8WXQGd_K9B_QvPFXEDQq2I"
-    } 
+    context: async ({ req }) => {
+        return { loggedInUser: await getUser(req.headers.token) }
+    }
 });
-
 /*
     Profile을 수정하려면 이 곳에서 editProfile쪽으로 token을 보내야 수정하려는 user가 로그인한 user와 동일한지 확인이 가능하다.
+    바로 headers에 담긴걸 꺼내려면 req로 호출하면 된다.
+    그런데 계속 token을 전달하지 않고 user를 전달하면 어떨까?
+    그걸 수행하는게 users.utils.js다
+
+    14번째 줄에 loggedInUser를 명심해라
+    앞으로 모든 곳에서 loggedInUser라는 변수가 있다면 이 곳에서 불러오는 것이다.
 */
 
 const PORT = process.env.PORT
