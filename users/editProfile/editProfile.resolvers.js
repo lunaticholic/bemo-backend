@@ -4,7 +4,7 @@ import client from "../../client"
 import bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
 
-const resolverFn = async (_, { username, email, password: newPassword }, { loggedInUser }) => {
+const resolverFn = async (_, { username, email, password: newPassword , bio}, { loggedInUser }) => {
     // console.log(loggedInUser)
 
     let uglyPassword = null;
@@ -12,7 +12,7 @@ const resolverFn = async (_, { username, email, password: newPassword }, { logge
         uglyPassword = await bcrypt.hash(newPassword, 10)
     }
 
-    const updateUser = await client.user.update({ where: { id: loggedInUser.id }, data: { username, email, ...(uglyPassword && {password: uglyPassword}) } })
+    const updateUser = await client.user.update({ where: { id: loggedInUser.id }, data: { username, email, bio, ...(uglyPassword && {password: uglyPassword}) } })
     if (updateUser.id) {
         return { ok: true }
     } else {

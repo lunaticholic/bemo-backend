@@ -4,12 +4,12 @@ require("dotenv").config();
 // import문을 사용하려면 package.json에 babel 관련 모듈이 설치되어 있는지 확인해보고, 없으면 README.md에 있는 babel모듈 전부를 설치해라
 // import문은 babel/preset-env가 있어야됨
 import { ApolloServer } from "apollo-server";
-import schema from "./schema";
+import { typeDefs, resolvers } from "./schema";
 import { getUser, protectResolver } from "./users/users.utils";
 
 // 서버를 실행할 때 이 녀석들을 데리고 서버를 실행하거라고 알려주는 녀석
 const server = new ApolloServer({ 
-    schema, 
+    typeDefs, resolvers,
     context: async ({ req }) => {
         return { loggedInUser: await getUser(req.headers.token), protectResolver }
     }
