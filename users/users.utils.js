@@ -18,7 +18,6 @@ export const getUser = async(token) => {
         return null;
     }
 }
-
 /*
     10번째 줄
     이 토큰이 변경되지 않은 순수하게 우리가 만들었다는걸 확인해야 된다.
@@ -28,14 +27,16 @@ export const getUser = async(token) => {
             근데 어떻게 받을거냐면 바로 server.js에 보면 친절하게 설명되어 있음
 */
 
-export const protectedResolver = (ourResolver) => (root, args, context, info) => {
-    if(!context.logginInUser) {
-        return {
-            ok: false,
-            error: "해당 작업을 수행하기 위해서는 로그인을 먼저 진행해 주시기 바랍니다."
+export function protectedResolver(ourResolver) {
+    return function(root, args, context, info) {
+        if(!context.logginInUser) {
+            return {
+                ok: false,
+                error: "해당 작업을 수행하기 위해서는 로그인을 먼저 진행해 주시기 바랍니다."
+            }
         }
+        return ourResolver(root, args, context, info);
     }
-    return ourResolver(root, args, context, info);
 }
 /*
     protectedResolver를 사용하게 되면?
