@@ -11,6 +11,6 @@ Instalclone Backend...
 - [x] Change Avatar (Image Upload)
 - [x] Follow User
 - [x] UnFollow User
-- [] See Followers
-- [] See Following
+- [] See Followers & See Following with Pagination
+- [] Compute Fields
 - [] Search Users
