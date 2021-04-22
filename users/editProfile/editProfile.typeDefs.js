@@ -14,6 +14,7 @@ export default gql`
             email: String
             password: String
             bio: String
+            avatar: Upload
         ): EditProfileResult!
     }
 `;
@@ -27,4 +28,7 @@ export default gql`
     12번째 줄
     Mutation 내부에 Profile을 수정하기 위해서 어떤 값이 있어야 해당 유저인지 알 수 있을까?
     바로 token 값을 이용하면 된다.
+
+    프로필 사진을 올리고 싶다면?
+    avatar를 Upload로 설정하면 됨
 */

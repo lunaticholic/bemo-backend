@@ -7,8 +7,15 @@ Instalclone Backend...
 ## Installation Program
 
 -[X] postgreSQL
-_ https://postgresapp.com/downloads.html -[X] pgAdmin
-_ https://www.pgadmin.org/download/pgadmin-4-macos/
+\_ https://postgresapp.com/downloads.html
+
+-[X] pgAdmin
+\_ https://www.pgadmin.org/download/pgadmin-4-macos/
+
+-[X] Altair
+_ playground로는 파일 업로드 테스트 못함
+_ https://altair.sirmuel.design/
+\_ 테스트할 때에는 로그인하여 발급한 토큰을 헤더에 설정하면 끗
 
 ## Installation NPM Module
 

@@ -28,15 +28,15 @@ export const getUser = async(token) => {
 */
 
 export function protectedResolver(ourResolver) {
-    return function(root, args, context, info) {
-        if(!context.logginInUser) {
+    return function (root, args, context, info) {
+        if (!context.loggedInUser) {
             return {
                 ok: false,
-                error: "해당 작업을 수행하기 위해서는 로그인을 먼저 진행해 주시기 바랍니다."
-            }
+                error: "해당 작업을 수행하기 위해서는 로그인을 먼저 진행해 주시기 바랍니다.",
+            };
         }
         return ourResolver(root, args, context, info);
-    }
+    };
 }
 /*
     protectedResolver를 사용하게 되면?

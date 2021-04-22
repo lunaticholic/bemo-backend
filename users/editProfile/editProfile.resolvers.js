@@ -4,27 +4,34 @@ import client from "../../client"
 import bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
 
-const resolverFn = async (_, { username, email, password: newPassword , bio}, { loggedInUser }) => {
+const resolverFn = async (_, { username, email, password: newPassword , bio, avatar}, { loggedInUser }) => {
     // console.log(loggedInUser)
-
+    console.log(avatar);
     let uglyPassword = null;
-    if ( newPassword ) {
-        uglyPassword = await bcrypt.hash(newPassword, 10)
-    }
-
-    const updateUser = await client.user.update({ where: { id: loggedInUser.id }, data: { username, email, bio, ...(uglyPassword && {password: uglyPassword}) } })
-    if (updateUser.id) {
-        return { ok: true }
+    if (newPassword) { uglyPassword = await bcrypt.hash(newPassword, 10) }
+  const updatedUser = await client.user.update({
+        where: {
+            id: loggedInUser.id,
+        },
+        data: { 
+            username, email, bio,
+            ...(uglyPassword && { password: uglyPassword }),
+        }
+    });
+    if (updatedUser.id) { return { ok: true };
     } else {
-        return { ok: false, error: "PROFILE을 수정하지 못했습니다." }
+        return {
+        ok: false,
+        error: "Could not update profile.",
+        };
     }
-}
+};
 
 export default {
     Mutation: {
-        editProfile: protectedResolver(resolverFn)
-    }
-}
+        editProfile: protectedResolver(resolverFn),
+    },
+};
 /*
     7번째 줄
     Profile을 수정할 때 어떤 데이터들을 보내야 될까?
@@ -44,4 +51,9 @@ export default {
     24번째 줄
     protectedResolver를 호출하게 되면 어떤 현상이 발생하는냐?
     여기에 user가 로그인 되어 있는지 안되어 있는지 선행을 시작하게 됨. 로그인 안되어 있으면? 못하는거지 뭐
+*/
+
+/*
+    이 곳의 구문을 실행하려면 Altair를 실행해서 하면 되는데
+    Altair는 Mutation을 보내기 전에 type을 확인해준다.
 */
