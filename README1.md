@@ -62,6 +62,15 @@ _ 명령어가 달라질수도 있으니 홈페이지를 먼저 방문해서 확
 -[X] npm install bcrypt
 \_ 비밀번호를 hashing해서 저장하기 위한 아주 좋은 모듈
 
+-[X] npm install apollo-server-express
+\_ apollo-server로 할 수 있는 환경은 매우 제한적인 관계로 middleware인 express를 겸용해야 한다.
+
+-[X] npm install morgan
+\_ 로깅(logging)에 도움을 주는 미들웨어, 로깅이란 무슨일이 어디에서 일어났는지를 기록하는 것을 의미한다.
+_ https://www.npmjs.com/package/morgan
+_ tiny: 간략하게 로그를 기록하는 것
+\_ combined: 상세하게 로그를 기록하는 것
+
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev
