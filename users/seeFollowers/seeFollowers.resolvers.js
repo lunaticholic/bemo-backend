@@ -3,6 +3,7 @@ import client from "../../client"
 export default {
     Query: {
         // 팔로워를 찾는 방법은 2가지가 있음
+        // 여기서 구현한 방식은 offset pagination 방식임
         seeFollowers: async(_, { username, page }) => {
             const ok = await client.user.findUnique({ where: { username }, select: { id: true } })
             if (!ok) {
