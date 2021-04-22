@@ -10,7 +10,7 @@ import express from "express";
 import logger from "morgan";
 
 // 서버를 실행할 때 이 녀석들을 데리고 서버를 실행하거라고 알려주는 녀석
-const server = new ApolloServer({ 
+const apollo = new ApolloServer({ 
     typeDefs, resolvers,
     context: async ({ req }) => {
         return { loggedInUser: await getUser(req.headers.token), protectResolver }
@@ -32,7 +32,11 @@ const PORT = process.env.PORT
 const app = express();
 // 앞으로 app을 실행할 때마다 로그를 기록할 것이다. 그것도 터미널에서 일정한 시간 간격을 두고 말이다.
 app.use(logger("tiny"));
-server.applyMiddleware({ app });
+// 혹시 로컬 서버에 있는 폴더에 저장된 파일(여기서는 사진이겠지?)을 보고싶다면?
+// express.static안에는 폴더명만 집어넣으면 됨, URL경로랑은 전혀 상관없디요
+app.use("/static", express.static("uploads"));
+
+apollo.applyMiddleware({ app });
 
 // 서버가 작동하는지 확인하는 가장 간단한 방법
 // port 뒤에는 callback을 통해 터미널에 서버가 실행된다면 이 메세지를 출력하라고 보여주는 것임

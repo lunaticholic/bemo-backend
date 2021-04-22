@@ -18,7 +18,10 @@ export default {
 
                 return client.user.create({ data: { username, email, password: uglyPassword } });
             } catch (e) {
-                return e;
+                return {
+                    ok: false,
+                    error: "계정을 생성할 수 없습니다. 입력하신 정보를 확인해주세요."
+                }
             }
         },
     },
