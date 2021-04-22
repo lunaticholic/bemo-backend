@@ -17,6 +17,8 @@ export default gql`
         avatar: String
         createdAt: String!
         updatedAt: String!
+        following: [User]
+        followers: [User]
     }
 `;
 // 다른 사람의 profile을 보려면 뭐로 검색해야 볼 수 있을까? 바로 username으로 검색해야되지?
