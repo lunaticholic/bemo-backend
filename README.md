@@ -12,6 +12,6 @@ Instalclone Backend...
 - [x] Follow User
 - [x] UnFollow User
 - [x] See Followers with Pagination
-- [] See Following with Pagination
+- [x] See Following with Pagination
 - [] Compute Fields
 - [] Search Users

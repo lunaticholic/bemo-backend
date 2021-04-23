@@ -3,7 +3,7 @@ import client from "../../client";
 export default {
     Query: {
         // 팔로워를 찾는 방법은 2가지가 있음
-        // 여기서 구현한 방식은 cursor pagination 방식임
+        // 여기서 구현한 방식은 cursor based pagination 방식임
         // curosr는 우리가 데이터베이스로 보내는 일종의 신호역할을 하는 녀석임! '여기가 지금 마지막 결과야'
         seeFollowing: async (_, { username, lastId }) => {
             // 실제 팔로잉중인 유저가 존재하는지 확인하는 작업

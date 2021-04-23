@@ -19,6 +19,12 @@ export default gql`
         updatedAt: String!
         following: [User]
         followers: [User]
+        totalFollowing: Int!
+        totalFollowers: Int!
     }
 `;
+//isFollowing: Boolean!
+//isMe: Boolean!
 // 다른 사람의 profile을 보려면 뭐로 검색해야 볼 수 있을까? 바로 username으로 검색해야되지?
+// isFollowing의 경우 내가 현재 보고 있는 사용자를 following중인지 확인해주는 필드이다. (참고로 이 필드는 데이터베이스에 저장되지 않는 가상의 필드이다)
+// isMe의 경우 내가 현재 보고 있는 profile이 내 자신의 profile이 맞다면 true로 반환해줄 것이다. (참고로 이 필드는 데이터베이스에 저장되지 않는 가상의 필드이다)
