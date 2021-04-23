@@ -71,6 +71,10 @@ _ https://www.npmjs.com/package/morgan
 _ tiny: 간략하게 로그를 기록하는 것
 \_ combined: 상세하게 로그를 기록하는 것
 
+-[X] npm install aws-sdk
+\_ 서버에서 AWS로 통신할 수 있게 해주는 Super 쩌는 모듈
+\_ 파일을 로컬이 아닌 서버에 저장해서 어느때나 볼 수 있게 해주는 것
+
 ## Intermediate execution instruction
 
 -[X] npx prisma migrate dev
