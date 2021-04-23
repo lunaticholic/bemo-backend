@@ -17,9 +17,15 @@ export default {
 
         // 여기서는 누가 request로 seeProfile을 요청하는지를 알고 있어야 작동할수 있다.
         // 만약 현재 로그인한 user의 id와 현재 조회하려는 user의 id가 같다면 본인의 profile을 볼 수 있겠지?
-        isMe: ({ id }, _, { loggedInUser }) => {
+        isMe: ({ id }, _, { loggedInUser }) => { if (!loggedInUser) { return false } return id === loggedInUser.id; },
+
+        // 현재 내가 보고있는 user를 follow중인지 확인하려면 어떻게 해야될까?
+        // 바로 지금 보고 있는 user의 id값을 불러와 확인할 수 있다.
+        isFollowing: async ({ id }, _, { loggedInUser }) => {
             if (!loggedInUser) { return false }
-            return id === loggedInUser.id;
-        }
+            const exists = await client.user.findUnique({ where: { username: loggedInUser.username } }).following({where: { id } })
+            // exists가 0이라면 false를 반환할것이고, 그러면 팔로잉하고 있지 않다는 의미이다.
+            return exists.length !== 0;
+        } 
     }
 }
