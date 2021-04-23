@@ -23,8 +23,8 @@ Beautiful Moment Backend w/ Heroku
 - [x] See Hashtag
 - [x] Search Photo
 - [x] Edit Photo
-- [] Like / UnLike Photo
-- [] See Photo Likes
-- [] See Feed
+- [x] Like / UnLike Photo
+- [x] See Photo Likes
+- [x] See Feed
 - [] See Photo Comments
 - [] Delete Photo
