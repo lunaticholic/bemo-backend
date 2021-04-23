@@ -16,7 +16,14 @@ export default {
         likes: ({ id }) => client.like.count({ where: { photoId: id } }),
 
         // 사진에 대한 댓글에 대한 갯수도 봐야겠지?
-        comments: ({ id }) => client.comment.count({ where: { photoId: id } })
+        comments: ({ id }) => client.comment.count({ where: { photoId: id } }),
+
+        // 현재 이 사진이 내꺼인지 아닌지도 확인해야겠지?
+        // 참고로 사진은 user가 업로드 하는거니까 userId가 담겨 있지롱
+        isMine: ({ userId }, _, { loggedInUser }) => {
+            if(!loggedInUser) { return false }
+            return userId === loggedInUser.id
+        }
     },
     Hashtag: {
         // 현재 hashtag에 등록된 사진을 확인해야 되는 것도 있네?
