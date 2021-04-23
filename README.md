@@ -1,6 +1,6 @@
-# Instaclone
+# BEMO w/ Heroku
 
-Instalclone Backend...
+Beautiful Moment Backend w/ Heroku
 
 ## User:
 
