@@ -13,7 +13,10 @@ export default {
         hashtags: ({ id }) => client.hashtag.findMany({ where: { photos: { some: { id } } } }),
 
         // 사진에 대한 likes의 갯수도 볼 수 있지 않을까?
-        likes: ({ id }) => client.like.count({ where: { photoId: id } })
+        likes: ({ id }) => client.like.count({ where: { photoId: id } }),
+
+        // 사진에 대한 댓글에 대한 갯수도 봐야겠지?
+        comments: ({ id }) => client.comment.count({ where: { photoId: id } })
     },
     Hashtag: {
         // 현재 hashtag에 등록된 사진을 확인해야 되는 것도 있네?
