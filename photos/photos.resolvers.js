@@ -10,7 +10,10 @@ export default {
 
         // 현재 사진의 hashtag가 무엇인지 알아보는 구문이다.
         // 어떻게 찾냐면 우리가 현재 찾은 사진의 id를 가지고 있는 hashtag를 찾아내는 것이다
-        hashtags: ({ id }) => client.hashtag.findMany({ where: { photos: { some: { id } } } })
+        hashtags: ({ id }) => client.hashtag.findMany({ where: { photos: { some: { id } } } }),
+
+        // 사진에 대한 likes의 갯수도 볼 수 있지 않을까?
+        likes: ({ id }) => client.like.count({ where: { photoId: id } })
     },
     Hashtag: {
         // 현재 hashtag에 등록된 사진을 확인해야 되는 것도 있네?
