@@ -28,10 +28,11 @@ Beautiful Moment Backend w/ Heroku
 - [x] See Feed
 - [x] See Photo Comments
 - [x] Is Mine
-- [] Delete Photo
+- [x] Delete Photo
 
 ## Comments
 
 - [x] Comment on Photo
-- [] Delete Comment (Is Mine)
+- [x] Is Mine
+- [x] Delete Comment
 - [] Edit Comments
