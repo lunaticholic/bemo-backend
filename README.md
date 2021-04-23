@@ -18,8 +18,8 @@ Instalclone Backend...
 
 ## Photos
 
-- [] Upload Photo (Parse #)
-- [] See Photo
+- [x] Upload Photo (Parse #)
+- [x] See Photo
 - [] See Hashtag
 - [] Search Photo
 - [] Edit Photo
