@@ -23,11 +23,12 @@ model User {
   password  String
   bio       String?
   avatar    String?
+  Photo     Photo[]
+  likes     Like[]
   followers User[]   @relation("FollowRelation", references: [id])
   following User[]   @relation("FollowRelation", references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Photo     Photo[]
 }
 
 // 팔로우와 같은 relationship관계를 가지려면 @relation안에 "" 이 이름이 둘이 똑같아야한다.
@@ -43,10 +44,9 @@ model Photo {
   file      String
   caption   String?
   hashtags  Hashtag[]
+  likes     Like[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-
-
 }
 
 // 해시태그는 끝에서 작성될수도 있지만 중간에 작성될 수도 있겠지?
@@ -57,4 +57,18 @@ model Hashtag {
   photos    Photo[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// 사진에 대한 좋아요의 정보를 저장해주는 모델
+// 2군데의 모델에 관계를 맺는 걸 볼 수 있군
+model Like {
+  id        Int      @id @default(autoincrement())
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  photoId   Int
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([photoId, userId])
 }

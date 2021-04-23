@@ -22,7 +22,7 @@ Beautiful Moment Backend w/ Heroku
 - [x] See Photo
 - [x] See Hashtag
 - [x] Search Photo
-- [] Edit Photo
+- [x] Edit Photo
 - [] Like / UnLike Photo
 - [] See Photo Likes
 - [] See Feed

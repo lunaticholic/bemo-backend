@@ -17,7 +17,7 @@ export default {
 
             // 사진을 수정했다면 사진을 업데이트하는 작업을 해야된다.
             // 참고로 caption을 수정할 때 안에 hashtag가 있었다면 기존의 hashtag는 지우고 새로운 hashtag로 저장해야되는거 알고 있지?
-            const photo = await client.photo.update({ 
+            await client.photo.update({ 
                 where: { id }, 
                 data: { 
                     caption, 
@@ -27,6 +27,7 @@ export default {
                     } 
                 } 
             })
+            return { ok: true }
             // console.log(photo)
         })
     }
