@@ -23,9 +23,13 @@ export default {
         // 바로 지금 보고 있는 user의 id값을 불러와 확인할 수 있다.
         isFollowing: async ({ id }, _, { loggedInUser }) => {
             if (!loggedInUser) { return false }
+            // 참고로 여기서는 findUnique메소드를 사용했지만 count를 사용할 수도 있다.
             const exists = await client.user.findUnique({ where: { username: loggedInUser.username } }).following({where: { id } })
+            // const exists = await client.user.count({ where: { username: loggedInUser.username, following: { some: { id } } } })
+            // 만약 count를 사용할 경우 return 값은 뭘로 바꿔야 될까? 32번째 줄에 적는다.
             // exists가 0이라면 false를 반환할것이고, 그러면 팔로잉하고 있지 않다는 의미이다.
             return exists.length !== 0;
+            // return Boolean(exists);
         } 
     }
 }
