@@ -11,10 +11,10 @@ AWS.config.update({
 })
 
 // AWS에 파일을 업로드하기 위한 사전 설정
-export const uploadPhoto = async ( file, userId ) => {
+export const uploadToS3 = async ( file, userId, folderName ) => {
     const { filename, createReadStream } = await file;
     const readStream = createReadStream();
-    const objectName = `${userId}-${Date.now()}-${filename}`;
+    const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
     const { Location } = await new AWS.S3().upload({
         Bucket: "bemo-backend",
         Key: objectName,

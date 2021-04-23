@@ -43,4 +43,4 @@ Beautiful Moment Backend w/ Heroku
 
 ## Extras
 
--[] S3 Image Upload
+-[x] S3 Image Upload
