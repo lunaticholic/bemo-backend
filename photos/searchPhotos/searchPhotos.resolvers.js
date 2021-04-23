@@ -4,10 +4,8 @@ import client from "../../client";
 
 export default {
     Query: {
-        // 누구나 사용할 수 있는 hashtag이므로 public으로 만들어 놓는다.
-        seeHashtag: (_, { hashtag }) => client.hashtag.findUnique({ where: { hashtag } })
+        // 유저들이 올려놓은 사진을 찾는 방법
+        // 고것은 바로 keyword 검색을 통해서 찾는다 유후
+        searchPhotos: (_, { keyword }) => client.photo.findMany({ where: { caption: { startsWith: keyword } } })
     }
 }
-
-// 해당 hashtag에 등록된 사진 배열과
-// 등록된 사진의 갯수

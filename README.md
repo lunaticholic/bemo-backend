@@ -20,8 +20,8 @@ Beautiful Moment Backend w/ Heroku
 
 - [x] Upload Photo (Parse #)
 - [x] See Photo
-- [] See Hashtag
-- [] Search Photo
+- [x] See Hashtag
+- [x] Search Photo
 - [] Edit Photo
 - [] Like / UnLike Photo
 - [] See Photo Likes

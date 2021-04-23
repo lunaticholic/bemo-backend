@@ -30,6 +30,9 @@ export default {
             // exists가 0이라면 false를 반환할것이고, 그러면 팔로잉하고 있지 않다는 의미이다.
             return exists.length !== 0;
             // return Boolean(exists);
-        } 
+        },
+        
+        // user가 업로드한 사진들을 저장하는 곳
+        photos: ({ id }) => client.user.findUnique({ where: { id } }).photos()
     }
 }
