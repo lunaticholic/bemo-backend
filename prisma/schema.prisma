@@ -17,18 +17,19 @@ generator client {
 // Prisma Migrate는 이 schema.prisma 파일의 데이터모델을 쓰고 설명할 수 있게 해주지요
 // 이 파일에 모든 Model들을 나열하면, Prisma Migrate는 그 설명들을 데이터베이스에 적용해줄거임
 model User {
-  id        Int      @id @default(autoincrement())
-  username  String   @unique
-  email     String   @unique
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  email     String    @unique
   password  String
   bio       String?
   avatar    String?
   Photo     Photo[]
   likes     Like[]
-  followers User[]   @relation("FollowRelation", references: [id])
-  following User[]   @relation("FollowRelation", references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  followers User[]    @relation("FollowRelation", references: [id])
+  following User[]    @relation("FollowRelation", references: [id])
+  comments  Comment[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 // 팔로우와 같은 relationship관계를 가지려면 @relation안에 "" 이 이름이 둘이 똑같아야한다.
@@ -45,8 +46,10 @@ model Photo {
   caption   String?
   hashtags  Hashtag[]
   likes     Like[]
+  comments  Comment[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+
 }
 
 // 해시태그는 끝에서 작성될수도 있지만 중간에 작성될 수도 있겠지?
@@ -71,4 +74,17 @@ model Like {
   updatedAt DateTime @updatedAt
 
   @@unique([photoId, userId])
+}
+
+// 사진에 대한 comment를 남기는 모델이다
+// payload는 comment에 담길 내용이고
+model Comment {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  payload   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    Int
+  photoId   Int
 }
