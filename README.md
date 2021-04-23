@@ -15,3 +15,16 @@ Instalclone Backend...
 - [x] See Following with Pagination
 - [x] Compute Fields
 - [x] Search Users
+
+## Photos
+
+- [] Upload Photo (Parse #)
+- [] See Photo
+- [] See Hashtag
+- [] Search Photo
+- [] Edit Photo
+- [] Like / UnLike Photo
+- [] See Photo Likes
+- [] See Feed
+- [] See Photo Comments
+- [] Delete Photo
