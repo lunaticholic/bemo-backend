@@ -11,6 +11,7 @@ import client from "../../client"
 import bcrypt from "bcrypt";
 import { protectedResolver } from "../users.utils";
 import { createWriteStream } from "fs";
+import { uploadPhoto } from "../../shared/shared.utils";
 
 // Profile을 수정할 때 어떤 데이터들을 보내야 될까? 그 점을 고려하는게 1번째 목적이고
 // 두번째는 password는 반드시 hashing된 password가 저장되어야 한다는 것을 기억해야 한다.
@@ -20,19 +21,23 @@ const resolverFn = async (_, { username, email, password: newPassword , bio, ava
 
     // avatar라는 변수에 사진이 업로드되면 if문 안에 있는 구문이 실행될 것이다.
     if (avatar) {
+        // avatarUrl에는 shared.utils.js에서 불러오는 uploadPhoto의 정보를 담을 것이다.
+        avatarUrl = await uploadPhoto(avatar, loggedInUser.id);
+        
+
         // Avatar를 통해 불러오는 사진의 정보를 보면 filename, createReadStream이라는 정보가 내장되어 있다. 그 정보를 가지고 본인의 프로필 사진을 불러오면 된다.
-        const { filename, createReadStream } = await avatar;
-        const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
+        // const { filename, createReadStream } = await avatar;
+        // const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
 
         // 그래서 모든 파일을 readStream을 통해서 받아낼 것이다. 어떤 것을? 사진에 담겨 있는 정보 중 createReadStream이라는 내부의 정보를 불러올것이다.
         // 참고로 이 createReadStream만 다시 불러오면 엄청나게 많은 정보가 들어있음을 알 수 있다.
-        const readStream = createReadStream();
+        // const readStream = createReadStream();
 
         // 현재 avatar를 저장할 때는 어떤 경로에 저장할 것인지 지정해주는 명령어이다. process.cwd()를 console.log에 출력해보면 현재 작업중인 폴더의 경로가 등장한다.
         // 또한 여러사람이 같은 이름으로 업로드하는 것을 방지하기 위해 unique한 파일로 업로드 될 수 있도록 지정해준다.
-        const writeStream = createWriteStream(process.cwd() + "/uploads/" + newFilename);
-        readStream.pipe(writeStream);
-        avatarUrl = `http//localhost:4000/static/${newFilename}`;
+        // const writeStream = createWriteStream(process.cwd() + "/uploads/" + newFilename);
+        // readStream.pipe(writeStream);
+        // avatarUrl = `http//localhost:4000/static/${newFilename}`;
     }
     
     let uglyPassword = null;

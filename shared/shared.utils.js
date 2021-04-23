@@ -9,3 +9,23 @@ AWS.config.update({
         secretAccessKey: process.env.AWS_SECRET
     }
 })
+
+// AWS에 파일을 업로드하기 위한 사전 설정
+export const uploadPhoto = async ( file, userId ) => {
+    const { filename, createReadStream } = await file;
+    const readStream = createReadStream();
+    const objectName = `${userId}-${Date.now()}-${filename}`;
+    const { Location } = await new AWS.S3().upload({
+        Bucket: "bemo-backend",
+        Key: objectName,
+        ACL: "public-read",
+        Body: readStream
+    }).promise();
+    return Location;
+}
+/*
+    Body: 파일을 의미함 (정확히는 stream)
+    Bucket: 사용자가 S3 서버에 만든 Bucket의 이름을 명시
+    Key: 업로드하는 파일의 이름을 지정
+    ACL: Object의 privacy, public-read는 아무나 read 할 수 있다는 말임
+*/
