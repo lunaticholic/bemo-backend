@@ -39,7 +39,7 @@ Beautiful Moment Backend w/ Heroku
 
 ## Refactoring
 
--[] Mutation Resopnses
+-[x] Mutation Resopnses
 
 ## Extras
 
