@@ -25,6 +25,6 @@ Beautiful Moment Backend w/ Heroku
 - [x] Edit Photo
 - [x] Like / UnLike Photo
 - [x] See Photo Likes
-- [x] See Feed
+- [] See Feed
 - [] See Photo Comments
 - [] Delete Photo
