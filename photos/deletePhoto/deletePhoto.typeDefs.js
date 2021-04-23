@@ -4,11 +4,7 @@ import { gql } from "apollo-server-core";
 
 // 사진을 지우려면? 그 사진의 id만 있으면 지우는 작업을 할 수 있겠네?
 export default gql`
-    type DeletePhotoResult {
-        ok: Boolean!
-        error: String
-    }
     type Mutation {
-        deletePhoto(id: Int!): DeletePhotoResult!
+        deletePhoto(id: Int!): MutationResponse!
     }
 `;

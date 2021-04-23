@@ -35,4 +35,12 @@ Beautiful Moment Backend w/ Heroku
 - [x] Comment on Photo
 - [x] Is Mine
 - [x] Delete Comment
-- [] Edit Comments
+- [x] Edit Comments
+
+## Refactoring
+
+-[] Mutation Resopnses
+
+## Extras
+
+-[] S3 Image Upload
