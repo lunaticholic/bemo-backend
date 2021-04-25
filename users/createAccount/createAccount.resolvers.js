@@ -6,22 +6,29 @@ import bcrypt from "bcrypt";
 // 메소드가 뭔지 궁금하면 메소드에 마우스를 갖다대봐!
 export default {
     Mutation: {
-        createAccount: async (_, { username, email, password }) => {
+        createAccount: async (
+            _,
+            { username, email, password }
+        ) => {
             try {
-                const existingUser = await client.user.findFirst({ where: { OR: [{ username }, { email }] } });
-                // console.log(existingUser);
-
-                if (!existingUser) { throw new Error("현재 사용중인 username입니다. ") }
-
+                const existingUser = await client.user.findFirst({
+                    where: {
+                        OR: [ { username }, { email } ],
+                    },
+                });
+                if (existingUser) { throw new Error("USERNAME 혹은 EMAIL이 사용중입니다.") }
                 const uglyPassword = await bcrypt.hash(password, 10);
-                // console.log(uglyPassword);
-
-                return client.user.create({ data: { username, email, password: uglyPassword } });
+                await client.user.create({
+                    data: { username, email, password: uglyPassword },
+                });
+                return {
+                    ok: true,
+                };
             } catch (e) {
                 return {
                     ok: false,
-                    error: "계정을 생성할 수 없습니다. 입력하신 정보를 확인해주세요."
-                }
+                    error: "계정을 생성할 수 없습니다.",
+                };
             }
         },
     },

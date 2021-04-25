@@ -7,9 +7,9 @@ import jwt from "jsonwebtoken";
 // 메소드가 뭔지 궁금하면 메소드에 마우스를 갖다대봐!
 export default {
     Mutation: {
-        login: async (_, { username, password }) => {
+        login: async (_, { email, password }) => {
             // user를 찾을때는 args.username으로 찾는다.
-            const user = await client.user.findFirst({ where: { username } })
+            const user = await client.user.findFirst({ where: { email } })
             if (!user) {
                 return { ok: false, error: "USER를 찾을 수 없습니다."}
             }
