@@ -16,13 +16,27 @@ export default {
         likes: ({ id }) => client.like.count({ where: { photoId: id } }),
 
         // 사진에 대한 댓글에 대한 갯수도 봐야겠지?
-        comments: ({ id }) => client.comment.count({ where: { photoId: id } }),
+        commentNumber: ({ id }) => client.comment.count({ where: { photoId: id } }),
+
+        // 사진에 대한 댓글도 봐야지?
+        comments: ({ id }) => client.comment.findMany({ where: { photoId: id }, include: { user: true } }),
 
         // 현재 이 사진이 내꺼인지 아닌지도 확인해야겠지?
         // 참고로 사진은 user가 업로드 하는거니까 userId가 담겨 있지롱
         isMine: ({ userId }, _, { loggedInUser }) => {
             if(!loggedInUser) { return false }
             return userId === loggedInUser.id
+        },
+
+        // 사진의 좋아요 버튼을 누르면 카운팅 되는 구문
+        // 좋아요 버튼을 취소할 수도 있음
+        isLiked: async ({ id }, _, { loggedInUser }) => {
+            if(!loggedInUser) { return false }
+            const ok = await client.like.findUnique({
+                where: { photoId_userId: { photoId: id, userId: loggedInUser.id } },
+                select: { id: true }
+            })
+            if (ok) { return true } return false;
         }
     },
     Hashtag: {
