@@ -26,7 +26,8 @@ const resolverFn = async (_, { username, email, password: newPassword , bio, ava
         avatarUrl = await uploadToS3(avatar, loggedInUser.id, "avatar");
 
 
-        // Avatar를 통해 불러오는 사진의 정보를 보면 filename, createReadStream이라는 정보가 내장되어 있다. 그 정보를 가지고 본인의 프로필 사진을 불러오면 된다.
+        // Avatar를 통해 불러오는 사진의 정보를 보면 filename, createReadStream이라는 정보가 내장되어 있다.
+        // 그 정보를 가지고 본인의 프로필 사진을 불러오면 된다.
         // const { filename, createReadStream } = await avatar;
         // const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
 

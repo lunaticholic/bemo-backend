@@ -7,8 +7,10 @@ export default {
         // 그러면 그 상대방들이 올린 사진만 보여지겠지?
         // 그리고 최근에 올린 게시물이 제일 상단에 올려지길 원하니까 orderby로 필터를 걸어주고
         // 생성된 날짜를 내림차순으로 진행하면 되겠네?
-        seeFeed: protectedResolver((_, __, { loggedInUser }) =>
+        seeFeed: protectedResolver((_, { offset }, { loggedInUser }) =>
             client.photo.findMany({
+                take: 2,
+                skip: offset,
                 where: {
                     OR: [
                         { user: { followers: { some: { id: loggedInUser.id } } } },

@@ -2,16 +2,17 @@
 // import문은 babel/preset-env가 있어야됨
 import AWS from "aws-sdk";
 
-// AWS에 접속하기 위한 계정을 설정하는 방법
-AWS.config.update({
-    credentials: {
-        accessKeyId: process.env.AWS_KEY,
-        secretAccessKey: process.env.AWS_SECRET
-    }
-})
-
 // AWS에 파일을 업로드하기 위한 사전 설정
 export const uploadToS3 = async ( file, userId, folderName ) => {
+
+    // AWS에 접속하기 위한 계정을 설정하는 방법
+    AWS.config.update({
+        credentials: {
+            accessKeyId: process.env.AWS_KEY,
+            secretAccessKey: process.env.AWS_SECRET
+        }
+    })
+
     const { filename, createReadStream } = await file;
     const readStream = createReadStream();
     const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;

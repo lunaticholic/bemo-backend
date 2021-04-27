@@ -6,6 +6,6 @@ export default {
     Query: {
         // 유저들이 올려놓은 사진을 찾는 방법
         // 고것은 바로 keyword 검색을 통해서 찾는다 유후
-        searchPhotos: (_, { keyword }) => client.photo.findMany({ where: { caption: { startsWith: keyword } } })
+    searchPhotos: (_, { keyword }) => { return client.photo.findMany({ where: { caption: { contains: keyword } } }) }
     }
 }
