@@ -5,6 +5,6 @@ import { gql } from "apollo-server";
 // 명심할 사항 둘, user는 절대로 DB에러를 보게 해서는 안된다. 만약 보인다? 그건 니가 멍청한거고 멍청한거임! 욕먹어도 싸다!
 export default gql`
     type Query {
-        seeProfile(username: String): User
+        seeProfile(username: String!): User
     }
 `;

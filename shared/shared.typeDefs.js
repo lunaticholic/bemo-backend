@@ -5,6 +5,7 @@ import { gql } from "apollo-server";
 // 반복해서 사용하고 있는 코들을 하나로 묶어서 고융해준다.
 export default gql`
     type MutationResponse {
+        id: Int
         ok: Boolean!
         error: String
     }

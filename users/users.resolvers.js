@@ -31,8 +31,7 @@ export default {
             return exists.length !== 0;
             // return Boolean(exists);
         },
-        
         // user가 업로드한 사진들을 저장하는 곳
-        photos: ({ id }) => client.user.findUnique({ where: { id } }).photos()
+        photos: ({ id }) => client.user.findFirst({ where: { id } }).Photo(),
     }
 }

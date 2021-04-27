@@ -14,14 +14,14 @@ export default {
                 }
             }
             // 사진을 발견했고 내용을 작성할 수 있다면 새롭게 만들면 끗남
-            await client.comment.create({
+            const newComment = await client.comment.create({
                 data: { 
                     payload, 
                     photo: { connect: { id: photoId } },
                     user: { connect: {id: loggedInUser.id } }
                 }
             })
-            return { ok: true }
+            return { ok: true, id: newComment.id }
         })
     }
 }
